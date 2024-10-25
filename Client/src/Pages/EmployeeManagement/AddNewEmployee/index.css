@@ -1,0 +1,58 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #D9D9D9;
+    border-radius: 4px;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-align: center;
+    margin: 10px;
+    width: 300px;
+    height: 800PX;
+    margin-right: 1px;
+
+    background-image: url('../../../assets/images/loging-bg.jpg'); /* Set background image */
+    background-size: cover;      /* Ensure the image covers the entire dashboard */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating of the image */
+    min-height: 100vh;
+}
+.form{
+  margin-left: 300px;
+}
+.mx-auto.mt-5.card {
+    width: 915px;
+    height: 1000px;
+}
+
+.custom-label {
+    text-align: left;
+    display: block;
+  }
+
+.input-data{
+    margin-top:-40px;
+    margin-left: 40px;
+    width: 350px;
+}
+
+.rounded-circle-1{
+    width: 100px;  /* Adjust width */
+    height: 100px; /* Adjust height */
+    object-fit: cover; 
+    border: 3px solid #010101; /* Adjust border thickness and color */
+    padding: 5px; /* Adjust padding inside the frame */
+    background-color: #D9D9D9; /* Adjust background color of the frame */
+    display: block;
+    margin: 0 auto;
+}
+
+  .white-line {
+    border: none;       /* Remove default border */
+    height: 2px; 
+    width: 140px;       /* Set height of the line */
+    background-color: rgb(8, 8, 8); /* Set background color to white */
+    margin: 20px 0;   
+    margin-top: -30px;
+  }

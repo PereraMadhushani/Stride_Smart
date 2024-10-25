@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Oswald', Arial, sans-serif; /* Use Oswald font */
+  height: 100%;
+}
+
+/* Background for the body or outer container */
+.body-background {
+  background-image: url('../../assets/images/background.jpeg'); /* Fallback in case inline styling doesn't work */
+  background-size: cover;      /* Cover entire viewport */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Avoid repeating the background image */
+  min-height: 100vh;               /* Full viewport height */
+  display: flex;
+  justify-content: center;  /* Center horizontally */
+  align-items: center;      /* Center vertically */
+}
+
+/* Clear Square Container */
+.clear-square {
+  position: relative; /* Ensure it stays above the background */
+  width: 65%; /* Adjust as needed */
+  max-width: 800px; /* Set a maximum width */
+  height: auto; /* Height can be adjusted or set to auto */
+  background:pink(52, 50, 49, 0.5); /* Semi-transparent background */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+  border-radius: 50px; /* Rounded corners */
+  overflow: hidden; /* Hide any overflow */
+  z-index: 1; /* Ensure it stays above the blurred background */
+  display: flex;
+  justify-content: center; /* Center contents horizontally */
+  align-items: center; /* Center contents vertically */
+  padding: 20px; /* Padding around the content */
+}
+
+/* Styling for the login form container */
+.login-container {
+  display: flex;                     /* Use flexbox for layout */
+  justify-content: center;           /* Center child elements horizontally */
+  align-items: center;               /* Center child elements vertically */
+  width: 100%;                       /* Full width */
+}
+
+/* Styling for the login form */
+.w-50 {
+  width: 100% !important;  /* Full width for form */
+}
+
+.p-5 {
+  padding: 3rem !important;
+  color: #750E21;
+}
+
+.rounded {
+  border-radius: 10px; /* Add rounded corners */
+}
+
+.h3 {
+  margin-top: -0px; /* Adjust margin as needed */
+  color: #750E21 (50,50,20 0.5);
+  text-align: center; /* Center text */
+}
+
+.custom-heading {
+  text-align: center; /* Center text */
+}
+
+/* Styling for the form fields */
+.form-control {
+  border: 1px solid #cccccc00;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Button styling */
+.btn-success {
+  background-color: #191919;
+  border-color: #191919;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.btn-success:hover {
+  background-color: #750E21;
+  border-color: #750E21;
+}
+
+/* Checkbox and label styling */
+.mb-1 input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.mb-1 label {
+  font-size: 14px;
+}
+
+.mb-4 {
+  text-align: center; /* Align the logo and title to the right */
+}
+
+/* Forgot Password and Link Styling */
+.forgot-password-link {
+  display: block;
+  margin-top: 10px;
+  color: wheat;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: right;
+}
+
+.forgot-password-link:hover {
+  color: #750E21;
+  text-decoration: underline;
+}
+
+/* Responsive Design for Tablets (Screen width: 768px and below) */
+@media (max-width: 768px) {
+  .login-container {
+    width: 90% !important; /* Full width on smaller screens */
+  }
+
+  .h3, .custom-heading {
+    margin-left: 20px;  /* Adjust margins for smaller screens */
+  }
+
+  .clear-square {
+    width: 85%; /* Increase width on tablets */
+  }
+}
+
+/* Responsive Design for Mobile Phones (Screen width: 480px and below) */
+@media (max-width: 480px) {
+  .login-container {
+    width: 90% !important; /* Increase width on mobile */
+  }
+}

@@ -1,0 +1,115 @@
+.salary-slip-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #fdf2ec;
+    color: #000;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d25a1f;
+    padding: 10px;
+    color: #fff;
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .home-btn, .logout-btn {
+    background-color: #d25a1f;
+    border: none;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+    margin-right: 15px;
+  }
+  
+  .language-select {
+    padding: 8px;
+    margin-right: 15px;
+  }
+  
+  .employee-details {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+  
+  .employee-info {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+  }
+  
+  .employee-info label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .employee-info input, .employee-info select {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .salary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .salary-table th, .salary-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .salary-table th {
+    background-color: #e2a182;
+    color: #000;
+  }
+  
+  .salary-table td input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .net-salary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .net-salary input {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .download-btn, .send-btn {
+    background-color: #d25a1f;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .download-btn:hover, .send-btn:hover {
+    background-color: #e67a3c;
+  }
+  
