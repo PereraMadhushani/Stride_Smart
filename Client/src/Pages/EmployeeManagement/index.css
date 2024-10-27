@@ -19,20 +19,20 @@ body {
   z-index: 1; /* Ensure content is above the background image */
 }
 
-/* Full-screen background image styles */
+/* Full-screen background image styles 
 body::before {
   content: '';
-  position: fixed; /* Use fixed to cover entire viewport */
+  position: fixed; /* Use fixed to cover entire viewport 
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../../assets/images/loging-bg.jpg'); /* Set your background image */
-  background-size: cover; /* Ensure the image covers the entire dashboard */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Prevent repeating of the image */
-  z-index: 0; /* Send the background behind the content */
-}
+  background-image: url('../../assets/images/loging-bg.jpg'); /* Set your background image 
+  background-size: cover; /* Ensure the image covers the entire dashboard 
+  background-position: center; /* Center the image 
+  background-repeat: no-repeat; /* Prevent repeating of the image 
+  z-index: 0; /* Send the background behind the content 
+}*/
 
 /* Other styles */
 .employee-management-system h1 {

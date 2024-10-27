@@ -19,6 +19,11 @@ import NewRequest from './Pages/NewRequest';
 import Notification from './Pages/Notifications';
 import SalaryCalc from './Pages/SalaryCalc';
 import SalarySlip from './Pages/SalarySlip';
+import EditEmployee from './Pages/EditEmployee.js'
+import AddNewUser from './Pages/AdminDashboard/AddNewUser'
+import AdminDashboard from './Pages/AdminDashboard'
+import StoreManagerDashboard from './Pages/StoreManager/StoreManagerDashboard';
+
 import './App.css';
 
 function App() {
@@ -44,6 +49,12 @@ function App() {
         <Route path="/notifications" element={<Notification />} />
         <Route path="/salaryCalc" element={<SalaryCalc />} />
         <Route path="/salarySlip" element={<SalarySlip />} />
+        <Route path="/dashboard/edit_employee/:e_id" element={<EditEmployee />} />
+      <Route path="/admin_dashboard" element={<AdminDashboard/>}/>
+      <Route path="/addNewUser" element={<AddNewUser/>}/>
+      <Route path="/storemanager_dashboard" element={<StoreManagerDashboard />}></Route>
+      
+
       </Routes>
     </BrowserRouter>
   );
