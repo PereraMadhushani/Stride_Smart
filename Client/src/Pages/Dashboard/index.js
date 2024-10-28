@@ -8,7 +8,7 @@ import EmployeePerformance from '../EmployeePerformance';
 import LeaveManagement from '../Leave_01'; 
 import EmployeeManagementSystem from '../EmployeeManagement';
 import CalculateSalary from '../SalaryMain'; 
-import RequestMaterial from '../HistoryRequestMaterial'; 
+import HistoryRequestMaterial from '../HistoryRequestMaterial'; 
 import SeePerformance from '../SeePerformance';
 import AboutDrivers from '../Drivers';
 
@@ -21,7 +21,7 @@ const Dashboard = () => {
     { id: 2, title: 'Leave Management', path: '/leave01' }, 
     { id: 3, title: 'Employee Management System', path: '/employeeManagement' }, 
     { id: 4, title: 'Calculate Salary', path: '/salaryMain' },
-    { id: 5, title: 'Request Material', path: '/historyRequestMaterial' },
+    { id: 5, title: 'Request Material', path: '/HistoryRequestMaterial' },
     { id: 6, title: 'See Performance', path: '/seePerformance' },
     { id: 7, title: 'About Drivers', path: '/drivers' },
   ];
@@ -81,7 +81,7 @@ const SelectedContent = ({ item }) => {
     case 4:
       return <CalculateSalary />;
     case 5:
-      return <RequestMaterial />;
+      return <HistoryRequestMaterial />;
     case 6:
       return <SeePerformance />;
     case 7:

@@ -2,12 +2,12 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { createServer } from 'http';
-import { managerRouter } from "./Routes/ManagerRoute.js";
 import { leaveRouter } from "./Routes/leaveRoute.js";
 import { adminRouter } from "./Routes/AdminRoute.js";
 import { employeeRouter } from "./Routes/EmployeeRoute.js";
 import { driverRouter } from "./Routes/DriverRoute.js";
 import { loginRouter } from "./Routes/loginRoute.js";
+import { countRouter } from "./Routes/CountRoute.js";
 import { Server } from "socket.io";
 import http from "http";
 
@@ -47,10 +47,11 @@ app.use((err, req, res, next) => {
 });
 
 app.use('/leave', leaveRouter(io)); 
-app.use('/admin', adminRouter()); 
+app.use('/admin', adminRouter(io)); 
 app.use('/employee', employeeRouter()); 
 app.use('/driver', driverRouter()); 
-app.use('/login', loginRouter()); 
+app.use('/login', loginRouter());
+app.use('/count', countRouter());
 app.use(express.static('Public'));
 
 // Handle Socket.IO connections

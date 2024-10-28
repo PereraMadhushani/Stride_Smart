@@ -1,41 +1,110 @@
-import React, { useState } from 'react';
-import { Container, Table, TableBody, TableCell, TableHead, TableRow, Button } from '@mui/material';
-import './index.css'; // Linking your CSS file
-import Navbar from '../../Components/Navbar';
-import SearchBar from '../../Components/SearchBar'; // Assuming you have a custom SearchBar component
+import { Button, Container, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
+import Navbar from '../../Components/Navbar'; // Assuming you have a Navbar component
+import './index.css'; // Assuming you have a CSS file for styling
 
-// Initial sample data for leave requests
-const initialData = [
-  { id: 1, appliedBy: 'John Doe', appliedOn: '2023-07-01', onLeave: '2023-07-05', duration: '5 days', status: 'Approval' },
-  { id: 2, appliedBy: 'Jane Smith', appliedOn: '2023-07-02', onLeave: '2023-07-10', duration: '3 days', status: 'Pending' },
-  { id: 3, appliedBy: 'Alice Johnson', appliedOn: '2023-07-03', onLeave: '2023-07-15', duration: '7 days', status: 'Rejected' },
-  { id: 4, appliedBy: 'Bob Brown', appliedOn: '2023-07-04', onLeave: '2023-07-20', duration: '2 days', status: 'Approval' },
-  { id: 5, appliedBy: 'Eve Davis', appliedOn: '2023-07-05', onLeave: '2023-07-25', duration: '4 days', status: 'Approval' },
-];
 
-function App() {
-  const [data, setData] = useState(initialData);
+const LeaveManagementSystem = () => {
+  const [data, setData] = useState([]);
 
-  // Approve button handler
-  const handleApprove = (id) => {
-    setData(data.map(item => item.id === id ? { ...item, status: 'Approval' } : item));
+  useEffect(() => {
+
+    const socket = io('http://localhost:5000'); // Backend server URL
+
+    // Fetch initial data from the backend
+    axios
+      .get('http://localhost:5000/leave/apply')
+      .then((result) => {
+        console.log('API Response:', result.data);
+        if (result.data.Status) {
+          setData(result.data.Result); // Set data into state
+        } else {
+          console.error('Error fetching data:', result.data.Error);
+          alert(result.data.Error);
+        }
+      })
+      .catch((err) => console.log('API Error:', err));
+
+    // Listen for WebSocket updates
+    socket.on('leaveStatusUpdated', (update) => {
+      console.log('WebSocket update received:', update); // Log the received update
+      setData((prevData) =>
+        prevData.map((item) =>
+          item.leave_id === update.leave_id ? { ...item, status: update.status } : item
+        )
+      );
+    });
+
+    socket.on('disconnect', () => {
+      console.log('WebSocket connection disconnected'); // Log when the connection is disconnected
+    });
+
+    return () => {
+      socket.off('leaveStatusUpdated');
+      socket.off('disconnect');
+    };
+  }, []);
+
+  const handleApprove = (leave_id, regNumber) => {
+    console.log('Attempting to approve:', leave_id, regNumber);
+    axios
+      .post('http://localhost:5000/leave/approve', {
+        leave_id,
+        managerId: 1, // Assuming managerId is 1
+        regNumber,
+      })
+      .then((response) => {
+        if (response.data.message === 'Leave Approved') {
+          setData((prevData) =>
+            prevData.map((item) =>
+              item.leave_id === leave_id ? { ...item, status: 'Approved' } : item
+            )
+          );
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
-  // Reject button handler
-  const handleReject = (id) => {
-    setData(data.map(item => item.id === id ? { ...item, status: 'Rejected' } : item));
+  const handleReject = (leave_id, regNumber) => {
+    axios
+      .post('http://localhost:5000/leave/reject', {
+        leave_id,
+        managerId: 1, // Assuming managerId is 1
+        regNumber,
+      })
+      .then((response) => {
+        if (response.data.message === 'Leave rejected') {
+          setData((prevData) =>
+            prevData.map((item) =>
+              item.leave_id === leave_id ? { ...item, status: 'Rejected' } : item
+            )
+          );
+        }
+      })
+      .catch((err) => console.log(err));
   };
+
+  /*const formatRegNumber = (regNumber) => {
+    const regNumberStr = String(regNumber);
+    // For example, M-001 for managers, S-002 for store managers
+    if (regNumberStr.startsWith('M-')) return `Manager ${regNumberStr}`;
+    if (regNumberStr.startsWith('S-')) return `Store Manager ${regNumberStr}`;
+    if (regNumberStr.startsWith('D-')) return `Driver ${regNumberStr}`;
+    if (regNumberStr.startsWith('E-')) return `Employee ${regNumberStr}`;
+    return `Admin ${regNumberStr}`;
+  };*/
+  
 
   return (
     <>
-      <Navbar />  {/* Custom Navbar Component */}
+      <Navbar />
       <Container>
         <h1>Leave Management System</h1>
-        <SearchBar />  {/* Custom SearchBar Component */}
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>#</TableCell>
               <TableCell>Applied By</TableCell>
               <TableCell>Applied On</TableCell>
               <TableCell>On Leave</TableCell>
@@ -46,16 +115,34 @@ function App() {
           </TableHead>
           <TableBody>
             {data.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.id}</TableCell>
-                <TableCell>{item.appliedBy}</TableCell>
-                <TableCell>{item.appliedOn}</TableCell>
-                <TableCell>{item.onLeave}</TableCell>
+              <TableRow key={item.leave_id}>
+                <TableCell>{(item.regNumber)}</TableCell>
+                <TableCell>
+                    {isNaN(new Date(item.date)) ? 'Invalid Date' : new Date(item.date).toLocaleDateString()}
+                </TableCell>
+                <TableCell>
+                    {isNaN(new Date(item.leave_date)) ? 'Invalid Date' : new Date(item.leave_date).toLocaleDateString()}
+                </TableCell>
+
                 <TableCell>{item.duration}</TableCell>
                 <TableCell>{item.status}</TableCell>
                 <TableCell>
-                  <Button variant="contained" color="success" onClick={() => handleApprove(item.id)}>✔️</Button>
-                  <Button variant="contained" color="error" onClick={() => handleReject(item.id)}>❌</Button>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={() => handleApprove(item.leave_id, item.regNumber)}
+                    disabled={item.status !== 'Pending'}
+                  >
+                    ✔️
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => handleReject(item.leave_id, item.regNumber)}
+                    disabled={item.status !== 'Pending'}
+                  >
+                    ❌
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -64,6 +151,6 @@ function App() {
       </Container>
     </>
   );
-}
+};
 
-export default App;
+export default LeaveManagementSystem;
