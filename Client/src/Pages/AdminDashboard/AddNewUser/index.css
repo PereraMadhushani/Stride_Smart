@@ -9,7 +9,10 @@ body {
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  padding: 2rem;
+  padding: 1.5rem; /* Adjusted padding for a more compact view */
+  max-width: 800px; /* Set a max width */
+  margin: auto; /* Center the form container */
+  overflow: hidden; /* Prevent scrolling */
 }
 
 h3 {
@@ -21,8 +24,8 @@ h3 {
 /* Input Fields */
 .form-control {
   border: 1px solid #ccc;
-  padding: 0.75rem;
-  font-size: 1rem;
+  padding: 0.5rem; /* Reduced padding */
+  font-size: 0.9rem; /* Smaller font size */
   transition: border-color 0.2s ease-in-out;
   background-color: #fdfdfd;
 }
@@ -34,7 +37,7 @@ h3 {
 
 /* Label Styles */
 label.form-label {
-  font-size: 1.1rem;
+  font-size: 1rem; /* Slightly reduced font size */
   font-weight: 500;
   color: #34495e;
 }
@@ -42,8 +45,8 @@ label.form-label {
 /* Select Dropdown */
 select.form-select {
   width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
+  padding: 0.5rem; /* Reduced padding */
+  font-size: 0.9rem; /* Smaller font size */
   border-radius: 0;
   border: 1px solid #ccc;
   background-color: #fff;
@@ -56,8 +59,8 @@ select.form-select:focus {
 
 /* File Input */
 input[type="file"] {
-  padding: 0.5rem;
-  font-size: 1rem;
+  padding: 0.25rem; /* Reduced padding */
+  font-size: 0.9rem; /* Smaller font size */
   border: 1px solid #ccc;
   background-color: #fff;
 }
@@ -66,8 +69,8 @@ input[type="file"] {
 .btn {
   background-color: #3498db;
   color: #fff;
-  padding: 0.75rem;
-  font-size: 1.1rem;
+  padding: 0.5rem; /* Reduced padding */
+  font-size: 0.9rem; /* Smaller font size */
   border: none;
   transition: background-color 0.3s ease-in-out;
   cursor: pointer;
@@ -97,8 +100,11 @@ input[type="file"] {
 /* Form Fields Layout */
 form {
   gap: 1rem;
+  display: flex;
+  flex-direction: column; /* Stack fields vertically */
 }
 
+/* Adjust input and select for compact layout */
 .form-control,
 select.form-select,
 .btn {
@@ -108,8 +114,8 @@ select.form-select,
 /* Customize the Select Dropdown */
 select#role {
   width: 100%;
-  height: 45px;
-  font-size: 1rem;
+  height: 40px; /* Slightly reduced height */
+  font-size: 0.9rem; /* Smaller font size */
   color: #2c3e50;
   background: #fff;
   border-radius: 4px;
@@ -118,7 +124,7 @@ select#role {
 }
 
 input[type="file"] {
-  font-size: 1rem;
+  font-size: 0.9rem; /* Smaller font size */
   border-radius: 4px;
   border: 1px solid #ccc;
 }
@@ -148,4 +154,10 @@ button {
 /* Button Hover Effects */
 button:focus {
   outline: none;
+}
+
+/* Adjust overall height to prevent scrolling */
+html, body {
+  height: 100%; /* Full height */
+  overflow: hidden; /* Prevent scrolling */
 }
