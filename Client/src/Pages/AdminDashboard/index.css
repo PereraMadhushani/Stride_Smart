@@ -1,4 +1,6 @@
-
+body{
+  overflow-y: auto;
+}
 
 .employee-management-system {
   text-align: center;
