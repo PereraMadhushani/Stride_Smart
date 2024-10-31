@@ -93,62 +93,76 @@ export const registerUser = async (req, res) => {
         await con.query(roleInsertQuery, roleValues);
         console.log('User registered successfully in relevant table:', role);
 
-        // Notify managers about new registration
-        const message = `New user ${name} has been registered as a ${role}.`;
-        console.log('Notification message to managers:', message);
+// Notify managers about new registration
+const message = `New user ${name} has been registered as a ${role}.`;
+console.log('Notification message to managers:', message);
 
-        const managers = await con.query('SELECT id FROM user WHERE role = "manager"');
-        console.log('Managers retrieved:', managers);
+// Step 1: Retrieve managers with role "manager"
+con.query('SELECT id FROM user WHERE role = "manager"', async (error, results) => {
+    if (error) {
+        console.error('Error retrieving managers:', error);
+        return res.status(500).json({ success: false, error: 'Error retrieving managers' });
+    }
 
-        if (Array.isArray(managers) && managers.length > 0) {
-            for (const manager of managers) {
+    const managers = results; // Assign query results to `managers`
+    console.log('Managers retrieved:', managers);
+
+    // Step 2: Check if managers are found
+    if (Array.isArray(managers) && managers.length > 0) {
+        // Process each manager's notification asynchronously
+        for (const manager of managers) {
+            try {
                 console.log('Sending notification to manager ID:', manager.id);
-                
-                // Insert notification for each manager
-                await con.query(
-                    'INSERT INTO notifications (id, message, status) VALUES (?, ?, "unread")',
-                    [manager.id, message]
-                );
 
-                // If WebSocket connection exists for the manager, send a real-time notification
+                // Step 3: Insert notification for each manager
+                await new Promise((resolve, reject) => {
+                    con.query(
+                        'INSERT INTO notifications (id, message, status) VALUES (?, ?, "unread")',
+                        [manager.id, message],
+                        (insertError, result) => {
+                            if (insertError) reject(insertError);
+                            else resolve(result);
+                        }
+                    );
+                });
+
+                // Step 4: Send a real-time notification via WebSocket if the connection exists
                 if (global.wsConnections[manager.id]) {
                     global.wsConnections[manager.id].send(JSON.stringify({ message }));
                     console.log('Real-time notification sent to manager ID:', manager.id);
                 }
+            } catch (error) {
+                console.error('Error sending notification to manager ID:', manager.id, error);
             }
         }
-
+        // Step 5: Respond with success after all notifications are sent
         return res.status(200).json({ status: true, message: 'User registered and notifications sent.' });
-    } catch (error) {
-        console.error('Error during user registration:', error);
-        res.status(500).send({ success: false, error: error.message });
+    } else {
+        console.log('No managers found to notify.');
+        return res.status(200).json({ status: true, message: 'User registered but no managers to notify.' });
     }
+});
+} catch (error) {
+    console.error('Error during user registration:', error);
+    res.status(500).send({ success: false, error: error.message });
+}
 };
 
-// // Get users function
-// export const getUsers1 = async (req, res) => {
-//     console.log('GetUsers function called');
+// Get notifications for a specific user
+export const getNotifications = (req, res) => {
+    const { userId } = req.params; // Assume you pass the user's ID in the request params
+
+    con.query('SELECT * FROM notifications WHERE id = ? AND status = "unread" ORDER BY created_at DESC', [userId], (error, results) => {
+        if (error) {
+            console.error('Error fetching notifications:', error);
+            return res.status(500).json({ success: false, error: 'Failed to fetch notifications' });
+        }
+
+        res.status(200).json({ success: true, notifications: results });
+    });
+};
+
     
-//     try {
-//         const result =  await con.query('SELECT * FROM user');
-//         console.log('Raw query result:', result);
-
-//         if (!Array.isArray(result) || result.length === 0) {
-//             console.log('Unexpected result format1:', result);
-//             return res.status(500).send({ success: false, message: 'Unexpected result format2.' });
-//         }
-
-//        /* console.log('Query result:', util.inspect(result, { depth: null })); // Log the result to see its structure
-
-//         const users = result ;  // Assign directly if result is not an array*/
-//         console.log('Users retrieved:', result);
-//         res.status(200).json(result);
-//     } catch (error) {
-//         // Log only the error message
-//         console.error('Error retrieving users:', error);
-//         res.status(500).send({ success: false, error: error.message || 'Internal Server Error' });
-//     }
-// };
 
 export const getUsers = (req, res) => {
     console.log('GetUsers function called');
@@ -190,4 +204,4 @@ export const deleteUser = async (req, res) => {
 };
 
 // Export multer upload middleware
-export { upload };
+export { upload }

@@ -2,7 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import { registerUser, getUsers, deleteUser } from './controllers/UserController.js';
+import { registerUser, getUsers, deleteUser,getNotifications } from './controllers/userController.js';
 
 export function adminRouter(io) {
     const router = express.Router();
@@ -46,6 +46,8 @@ export function adminRouter(io) {
         });
     }, registerUser);    router.get('/users', getUsers); // Get all users
     router.delete('/deleteUser/:id', deleteUser); // Delete user by ID
+    router.get('/notifications/:userId', getNotifications);
+
 
     // Define additional admin routes here if needed
     // Example:
