@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Navbar from '../Components/NavBar'; // Assuming you have a Navbar component
+import Navbar from '../../Components/Navbar'; // Assuming you have a Navbar component
 import './index.css';
 import { useTranslation } from 'react-i18next';
 

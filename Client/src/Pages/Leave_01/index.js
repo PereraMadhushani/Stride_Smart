@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Table, TableBody, TableCell, TableHead, TableRow, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import './index.css'; // Linking your CSS file
 import Navbar from '../../Components/Navbar';
 import SearchBar from '../../Components/SearchBar'; // Assuming you have a custom SearchBar component
@@ -15,15 +16,11 @@ const initialData = [
 
 function App() {
   const [data, setData] = useState(initialData);
+  const navigate = useNavigate();
 
-  // Approve button handler
-  const handleApprove = (id) => {
-    setData(data.map(item => item.id === id ? { ...item, status: 'Approval' } : item));
-  };
-
-  // Reject button handler
-  const handleReject = (id) => {
-    setData(data.map(item => item.id === id ? { ...item, status: 'Rejected' } : item));
+  // Navigate to LeaveApplicationForm
+  const handleAction = (id) => {
+    navigate(`/leave-application/${id}`);
   };
 
   return (
@@ -35,7 +32,7 @@ function App() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>#</TableCell>
+              <TableCell>ID</TableCell>
               <TableCell>Applied By</TableCell>
               <TableCell>Applied On</TableCell>
               <TableCell>On Leave</TableCell>
@@ -54,8 +51,7 @@ function App() {
                 <TableCell>{item.duration}</TableCell>
                 <TableCell>{item.status}</TableCell>
                 <TableCell>
-                  <Button variant="contained" color="success" onClick={() => handleApprove(item.id)}>✔️</Button>
-                  <Button variant="contained" color="error" onClick={() => handleReject(item.id)}>❌</Button>
+                  <Button variant="contained" color="primary" onClick={() => handleAction(item.id)}>Action</Button>
                 </TableCell>
               </TableRow>
             ))}

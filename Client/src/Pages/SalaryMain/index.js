@@ -22,7 +22,7 @@ import Navbar from '../../Components/Navbar';
 import SearchBar from '../../Components/SearchBar';
 
 // Background image import (adjust the path as necessary)
-import bgImage from '../../assets/images/loging-bg.jpg'; 
+/*import bgImage from '../../assets/images/loging-bg.jpg'; */
 
 const SalaryMain = () => {
   const [salaryData, setSalaryData] = useState([
@@ -45,7 +45,7 @@ const SalaryMain = () => {
 
   return (
     <div style={{
-      backgroundImage: `url(${bgImage})`, // Set background image
+      /*backgroundImage: `url(${bgImage})`, // Set background image*/
       backgroundSize: 'cover',            // Cover the entire area
       backgroundPosition: 'center',       // Center the image
       backgroundRepeat: 'no-repeat',      // Prevent repeating the image

@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { IoNotificationsCircle } from "react-icons/io5";
+import { FaUserAlt } from "react-icons/fa";
 import axios from 'axios';
 import logo from '../../assets/images/logo.png';
-import person from '../../assets/images/person.png';
-import BackButton from '../BackButton'; // Import the BackButton
-import './index.css'; // Custom styles
+import BackButton from '../BackButton';
+import './index.css';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleLogout = () => {
     axios.get('http://localhost:5000/auth/logout')
@@ -25,39 +28,49 @@ const Navbar = () => {
       });
   };
 
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
-    <header className="navbar">
-      {/* Logo on the left */}
-      <div className="logo-container">
-        <img src={logo} className="logo" alt="logo" />
+    <header className="navbar-unique">
+      <div className="logo-container-unique">
+        <img src={logo} className="logo-unique" alt="logo" />
       </div>
 
-      {/* Menu on the right */}
-      <nav className="menu-container">
-        <ul className="menu-items">
-          <li>
-            <select className="language-select">
-              <option value="english">English</option>
-              <option value="sinhala">Sinhala</option>
-            </select>
-          </li>
+      <nav className="menu-container-unique">
+        <ul className="menu-items-unique">
           <li>
             <Link to="#">
-              <NotificationsNoneIcon className="icon" />
+              <IoNotificationsCircle className="icon-unique" />
             </Link>
           </li>
           <li>
-            <BackButton /> {/* Integrate BackButton here */}
+            <BackButton />
           </li>
-          <li>
-            <Link to="/profile" className="profile-link">
-              <img src={person} className="profile-img" alt="Profile" />
-            </Link>
-          </li>
-          <li>
-            <Link to="/" onClick={handleLogout} className="logout-link">
-              Logout
-            </Link>
+          <li className="dropdown-unique">
+            <div onClick={toggleDropdown} className="profile-link-unique">
+              <FaUserAlt className="profile-icon-unique" />
+            </div>
+            {dropdownOpen && (
+              <div className="dropdown-content-unique">
+                <select
+                  className="language-select-unique"
+                  onChange={(e) => changeLanguage(e.target.value)}
+                  value={i18n.language}
+                >
+                  <option value="en">English</option>
+                  <option value="si">සිංහල</option>
+                </select>
+                
+                <Link to="/settings">{t('settings')}</Link>
+                <Link to="/" onClick={handleLogout}>{t('logout')}</Link>
+              </div>
+            )}
           </li>
         </ul>
       </nav>

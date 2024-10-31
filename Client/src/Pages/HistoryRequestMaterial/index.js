@@ -1,9 +1,16 @@
 import React from 'react';
-import Navbar from '../../Components/Navbar'; // Import the NavBar component
+import { useNavigate } from 'react-router-dom';
+import { IconButton } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import './index.css';
-import { useTranslation } from 'react-i18next';
 
 const HistoryRequestMaterial = () => {
+  const navigate = useNavigate();
+
+  const handleAddClick = () => {
+    navigate('/newRequest');
+  };
+
   const requestData = [
     { id: 'E-001', name: '*******' },
     { id: 'E-002', name: '*******' },
@@ -20,13 +27,15 @@ const HistoryRequestMaterial = () => {
   };
 
   return (
-    <div className="history-container">
-      {/* Include NavBar component */}
-      <Navbar />
+    <div className="history-request-material-container">
+      <div className="header">
+        <h1>History of Request Material</h1>
+        <IconButton onClick={handleAddClick} className="add-button">
+          <AddIcon />
+        </IconButton>
+      </div>
 
       <section className="history-content">
-        <h2 className="history-title">History of Request Material</h2>
-
         <input type="text" placeholder="Search type of keywords" className="search-bar" />
 
         <table className="history-table">
