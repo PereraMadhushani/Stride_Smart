@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './index.css';
 import axios from 'axios';
 import Navbar from '../../Components/Navbar';
+import WebSocketComponent from '../../Components/WebSocketComponent';
 
 
 
@@ -15,7 +16,13 @@ const AdminDashboard = () => {
     const fetchUsers = async () => {
         try {
             const response = await axios.get('http://localhost:5000/admin/users');
-            setUser(response.data);
+            console.log(response.data);
+            if (response.data.success && Array.isArray(response.data.users)) {
+              setUser(response.data.users);
+            } else {
+              console.error('Expected an array but received:', response.data);
+              setUser([]); // Set to an empty array if the format is incorrect
+            }
         } catch (error) {
             console.error('Error fetching user:', error);
         }
@@ -34,13 +41,13 @@ const handleSubmit = async (userData) => {
   }
 };
 
-const handleDelete = async (u_id) => {
+const handleDelete = async (id) => {
   try {
-      const result = await axios.delete(`http://localhost:5000/admin/delete_user/${u_id}`);
+      const result = await axios.delete(`http://localhost:5000/admin/deleteUser/${id}`);
       
       if (result.data.Status) {
           // Filter out the deleted user from the state
-          setUser((prev) => prev.filter((item) => item.id !== u_id));
+          setUser((prev) => prev.filter((item) => item.id !== id));
       } else {
           alert(result.data.Error);
       }
@@ -55,6 +62,7 @@ const handleDelete = async (u_id) => {
     <><Navbar/>
     <div className="admin-dashboard">
       <h1>Users Management System</h1>
+      <WebSocketComponent />
       <div className="top-controls">
       <Link to="/addNewUser" className="add-user">Add New User</Link>
         <select className="select-year">

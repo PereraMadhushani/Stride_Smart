@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './index.css';
 
 
-const AddUserForm= () => {
+const AddNewUser= () => {
   const [user, setUser] = useState({
     id:'',
     regNumber: '',
@@ -53,9 +53,12 @@ const AddUserForm= () => {
       });
 
       // Check response and navigate if successful
-      if (response.data.status === true) {
+      if (response.data.status === true|| response.data.message === "User registered and notifications sent.")  {
         navigate('/admin_dashboard'); // Assuming you have a success route
       }
+     else {
+      console.error('Registration failed:', response.data.message || 'Unknown error');
+    }
     } catch (error) {
       console.error('There was an error!', error);
     }
@@ -67,21 +70,7 @@ const AddUserForm= () => {
       <div className="p-3 rounded w-50 border">
         <h3>Regiter New User</h3>
         <form className="row g-1" onSubmit={handleSubmit}>
-        <div className="col-12">
-            <label for="inputId" className="form-label">
-              ID:
-            </label>
-            <input
-              type="text"
-              className="form-control rounded-0"
-              id="inputId"
-              placeholder="Enter Id"
-              value={user.id}
-              onChange={(e) =>
-                setUser({ ...user, id: e.target.value })
-              }
-            />
-          </div>
+        
         <div className="col-12">
             <label for="inputRegNumber" className="form-label">
               Reg Number:
@@ -231,4 +220,4 @@ const AddUserForm= () => {
 
 
 
-export default AddUserForm;
+export default AddNewUser;
