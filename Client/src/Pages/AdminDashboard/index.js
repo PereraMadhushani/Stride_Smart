@@ -120,4 +120,6 @@ const handleDelete = async (u_id) => {
   );
 }
 
+
 export default AdminDashboard;
+

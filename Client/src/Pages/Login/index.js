@@ -6,26 +6,46 @@ import logo from '../../assets/images/logo.png';
 import './index.css';
 
 const Login = () => {
+    const navigate = useNavigate(); // For navigation after login
     const [values, setValues] = useState({
-        user_id: '',
+        regNumber: '', // Updated to match backend expectations
         password: ''
     });
-    const [error, setError] = useState(null);
-    const navigate = useNavigate();
-    axios.defaults.withCredentials = true;
+    const [error, setError] = useState('');
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        axios.post('http://localhost:5000/auth/managerlogin', values)
-            .then(result => {
-                if (result.data.loginStatus) {
+    // Handle form submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+    
+        try {
+            const res = await axios.post('http://localhost:5000/login/login', {
+                regNumber: values.regNumber,
+                password: values.password
+            });
+    
+            if (res.data.message) {
+                const userRole = res.data.user.role; // Get the user's role from the backend
+
+                // Navigate to the appropriate dashboard based on the role
+                if (userRole === 'admin') {
+                    navigate('/admin_dashboard');
+                } else if (userRole === 'manager') {
                     navigate('/dashboard');
+                } else if (userRole === 'storemanager') {
+                    navigate('/storemanager_dashboard');
                 } else {
-                    setError(result.data.Error);
+                    navigate('/dashboard'); // Fallback for other roles
                 }
-            })
-            .catch(err => console.log(err));
-    }
+            } else {
+                setError('Login failed. Please check your registration number and password.');
+            }
+        } catch (err) {
+            console.log('Axios Error:', err.response ? err.response.data : err.message); // Log error details
+            setError('An error occurred during login.'); // Update error state
+        }
+    };
+
 
     return (
         /*<div className='body-background' style={{ backgroundImage: `url(${bgImage})` }}>*/
@@ -42,13 +62,13 @@ const Login = () => {
                             {error && <div className="text-warning">{error}</div>}
                             <form onSubmit={handleSubmit}>
                                 <div className='mb-3'>
-                                    <label htmlFor='user_id'><strong>User ID:</strong></label>
+                                    <label htmlFor='regNumber'><strong>Reg Number:</strong></label>
                                     <input
                                         type="id"
-                                        name="user_id"
+                                        name="regNumber"
                                         autoComplete='off'
-                                        placeholder='Enter User ID'
-                                        onChange={(e) => setValues({ ...values, user_id: e.target.value })}
+                                        placeholder='Enter Reg Number'
+                                        onChange={(e) => setValues({ ...values, regNumber: e.target.value })}
                                         className='form-control rounded-0'
                                     />
                                 </div>

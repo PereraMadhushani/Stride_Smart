@@ -12,13 +12,7 @@ const HistoryRequestMaterial = () => {
   };
 
   const requestData = [
-    { id: 'E-001', name: '*******' },
-    { id: 'E-002', name: '*******' },
-    { id: 'E-003', name: '*******' },
-    { id: 'E-004', name: '*******' },
-    { id: 'E-005', name: '*******' },
-    { id: 'E-006', name: '*******' },
-    { id: 'E-007', name: '*******' },
+    
   ];
 
   const handleDetailsClick = (id) => {

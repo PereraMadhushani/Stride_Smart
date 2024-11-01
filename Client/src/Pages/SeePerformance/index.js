@@ -7,52 +7,73 @@ import './index.css';
 import SearchBar from '../../Components/SearchBar';
 
 const SeePerformance = () => {
+  
   const [performance, setPerformance] = useState({});
   const [year, setYear] = useState(new Date().getFullYear());
+
+  const [employeeTotal, setEmployeeTotal] = useState();
+  const [driverTotal, setDriverTotal] = useState();
+ 
+  const [orderTotal, setOrderTotal] = useState([]);
+
   const [filteredPerformance, setFilteredPerformance] = useState({});
+  const [year, setYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
-    fetchPerformanceData(year);
-  }, [year]);
+    employeeCount();
+    managerCount();
+    driverCount();
+    orderCount();
 
-  const fetchPerformanceData = async (selectedYear) => {
-    try {
-      const response = await axios.get(`/api/performance?year=${selectedYear}`);
-      setPerformance(response.data);
-      setFilteredPerformance(response.data);
-    } catch (error) {
-      console.error('Error fetching performance data:', error);
-    }
+    // Set the mock data as the initial performance data
+    setPerformance(mockData);
+    setFilteredPerformance(mockData);
+  }, []);
+
+  const employeeCount = () => {
+    axios.get('http://localhost:5000/count/employee_count')
+      .then(result => {
+        if (result.data.Status) {
+          setEmployeeTotal(result.data.Result[0].employee);
+        }
+      });
   };
+
+  const managerCount = () => {
+    axios.get('http://localhost:5000/count/manager_count')
+      .then(result => {
+        if (result.data.Status) {
+          setManagerTotal(result.data.Result[0].manager);
+        }
+      });
+  };
+
+  const driverCount = () => {
+    axios.get('http://localhost:5000/count/driver_count')
+      .then(result => {
+        if (result.data.Status) {
+          setDriverTotal(result.data.Result[0].driver);
+        }
+      });
+  };
+
+  const orderCount = () => {
+    axios.get('http://localhost:5000/count/order_count')
+      .then(result => {
+        if (result.data.Status) {
+          setOrderTotal(result.data.Result[0].order);
+        }
+      });
+  };
+
 
   const handleYearChange = (event) => {
     setYear(event.target.value);
   };
 
-  const filterData = (data, term) => {
-    if (!term) return data;
-    const lowercaseTerm = term.toLowerCase();
-    const filteredMonthlyData = data.monthlyData.filter((item) =>
-      Object.values(item).some((value) =>
-        String(value).toLowerCase().includes(lowercaseTerm)
-      )
-    );
-    return {
-      ...data,
-      monthlyData: filteredMonthlyData,
-      totalEmployees: filteredMonthlyData.length > 0 ? filteredMonthlyData[filteredMonthlyData.length - 1].Employees : 0,
-      totalCompleteOrders: filteredMonthlyData.length > 0 ? filteredMonthlyData[filteredMonthlyData.length - 1].Orders : 0,
-    };
-  };
-
   // Mock data for demonstration purposes
   const mockData = {
-    totalEmployees: 150,
-    newEmployees: 20,
-    totalDrivers: 50,
-    totalCompleteOrders: 1200,
-    totalDamagedProduct: 15,
-    salary: 500000,
+   
     monthlyData: [
       { month: 'Jan', Employees: 120, Orders: 100 },
       { month: 'Feb', Employees: 130, Orders: 110 },
@@ -69,21 +90,18 @@ const SeePerformance = () => {
     ],
   };
 
-  // Set the mock data as the initial performance data
-  useEffect(() => {
-    setPerformance(mockData);
-    setFilteredPerformance(mockData);
-  }, []);
-
   return (
     <>
       <Navbar />
       <div className="see-performance-container">
         <main>
+
           <h1 className="see-performance-title"><b>See Performance</b></h1>
           <div className="see-performance-filters">
             <SearchBar />
             <Select value={year} onChange={handleYearChange} className="see-performance-year-select">
+
+       
               {[...Array(10)].map((_, i) => (
                 <MenuItem key={i} value={new Date().getFullYear() - i}>
                   {new Date().getFullYear() - i}
@@ -102,6 +120,7 @@ const SeePerformance = () => {
                   </CardContent>
                 </Card>
               </Grid>
+
 
               <Grid item xs={12} sm={6} md={3}>
                 <Card className="see-performance-metric-card">

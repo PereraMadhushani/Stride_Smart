@@ -1,6 +1,7 @@
 
 
 .employee-management-system {
+
     text-align: center;
     padding: 20px;
     background-color: white; /* Ensure background contrasts with main background */
@@ -90,3 +91,5 @@
     height: 40px;
     border-radius: 50%;
   }
+
+

@@ -23,11 +23,18 @@ import NewRequest from './Pages/NewRequest';
 import Notification from './Pages/Notifications';
 import SalaryCalc from './Pages/SalaryCalc';
 import SalarySlip from './Pages/SalarySlip';
+
 import Order from "./Pages/Order";
 import AddOrderPage from "./Pages/Order/AddOrderPage";
 import ForgotPassword from "./Pages/Login/ForgotPassword";
 import OtpVerification from "./Pages/Login/OtpVerification";
 import SetNewPassword from "./Pages/Login/SetNewPassword";
+import EditEmployee from './Pages/EditEmployee.js'
+import EditDriver from './Pages/EditDriver'
+import AddNewUser from './Pages/AdminDashboard/AddNewUser'
+import AdminDashboard from './Pages/AdminDashboard'
+import StoreManagerDashboard from './Pages/StoreManager/StoreManagerDashboard';
+
 
 
 import './App.css';
@@ -52,18 +59,31 @@ function App() {
         <Route path="/salaryMain" element={<SalaryMain />} />
         <Route path="/salary" element={<Salary />} />
         <Route path="/leave01" element={<Leave_01 />} />
+
         <Route path="/leaveForm" element={<LeaveForm />}/>
         <Route path="/histortRequestMaterial" element={<HistoryRequestMaterial />} />
+
         <Route path="/newRequest" element={<NewRequest />} />
         <Route path="/notifications" element={<Notification />} />
         <Route path="/salaryCalc" element={<SalaryCalc />} />
         <Route path="/salarySlip" element={<SalarySlip />} />
+
         <Route path="/settings" element={<Settings />} />
         <Route path="/order" element={<Order />} />
         <Route path="/addOrderPage" element={<AddOrderPage />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/otpVerification" element={<OtpVerification />} />
         <Route path="/setNewPassword" element={<SetNewPassword />} />
+
+        <Route path="/dashboard/edit_employee/:e_id" element={<EditEmployee />} />
+      <Route path="/admin_dashboard" element={<AdminDashboard/>}/>
+      <Route path="/addNewUser" element={<AddNewUser/>}/>
+      <Route path="/storemanager_dashboard" element={<StoreManagerDashboard />}></Route>
+      <Route path="/edit_driver" element={<EditDriver />}></Route>
+      <Route path="/storemanager_dashboard" element={<StoreManagerDashboard />}></Route>
+      
+
+
       </Routes>
     </BrowserRouter>
   );

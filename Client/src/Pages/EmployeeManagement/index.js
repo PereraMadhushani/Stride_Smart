@@ -20,28 +20,33 @@ const EmployeeManagementSystem = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/auth/employee")
-      .then((result) => {
-        if (result.data.Status) {
-          setEmployee(result.data.Result);
-        } else {
-          alert(result.data.Error);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    // Use Axios to fetch employee data from backend API
+    axios.get('http://localhost:5000/employee/employees')
+        .then(response => {
+            setEmployee(response.data);  // Update state with fetched data
+        })
+        .catch(error => {
+            console.error('Error fetching employees:', error);
+        });
+}, []);
 
-  const handleDelete = (id) => {
-    axios.delete('http://localhost:5000/auth/delete_employee/' + id)
+  // Function to handle employee deletion
+  const handleDelete = (e_id) => {
+    console.log(`Attempting to delete employee with ID: ${e_id}`); // Log ID to be deleted
+    axios.delete(`http://localhost:5000/employee/delete_employee/${e_id}`)
       .then((result) => {
+        console.log("Delete result:", result.data); // Log the delete result
         if (result.data.Status) {
-          window.location.reload();
+          // If the deletion is successful
+          setEmployee(employee.filter(e => e.e_id !== e_id)); // Update state to reflect deletion
+          alert("Employee deleted successfully");
         } else {
           alert(result.data.Error);
         }
       })
-      .catch((err) => console.error("Error deleting employee:", err));
+      .catch((err) => {
+        console.error("Error deleting employee:", err);
+      });
   };
 
   return (

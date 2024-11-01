@@ -32,7 +32,7 @@ const upload = multer({
 });
 
 // Function to handle user registration
-export const adminRouter = () => {
+export const adminRouter = (io) => {
     router.post('/register', upload.single('image'), async (req, res, next) => {
         try {
             console.log(req.file);

@@ -10,13 +10,19 @@ import AboutDrivers from '../Drivers';
 import EmployeePerformance from '../EmployeePerformance';
 import LeaveManagement from '../Leave_01'; 
 import CalculateSalary from '../SalaryMain'; 
+
 import RequestMaterial from '../HistoryRequestMaterial'; 
 import Order from '../Order';
+
+import HistoryRequestMaterial from '../HistoryRequestMaterial'; 
+import SeePerformance from '../SeePerformance';
+import AboutDrivers from '../Drivers';
 
 const Dashboard = () => {
   const { t } = useTranslation();
 
   const items = [
+
     { id: 6, title: t('seePerformance'), component: <SeePerformance /> },
     { id: 3, title: t('employeeManagementSystem'), component: <EmployeeManagementSystem /> }, 
     { id: 7, title: t('aboutDrivers'), component: <AboutDrivers /> },
@@ -24,6 +30,7 @@ const Dashboard = () => {
     { id: 2, title: t('leaveManagement'), component: <LeaveManagement /> }, 
     { id: 4, title: t('calculateSalary'), component: <CalculateSalary /> },
     { id: 5, title: t('requestMaterial'), component: <RequestMaterial /> },
+
   ];
 
   // Set the initial state to the item corresponding to SeePerformance
@@ -68,8 +75,13 @@ const Sidebar = ({ items, selectedItem, setSelectedItem }) => {
 
 // Default content to show when no item is selected
 const DefaultContent = () => {
+
   const { t } = useTranslation();
   return <h2>{t('welcomeMessage')}</h2>;
+
+
+
+
 };
 
 export default Dashboard;
