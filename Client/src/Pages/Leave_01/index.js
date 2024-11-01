@@ -1,10 +1,14 @@
-import { Button, Container, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+
+
+import { Container, Table, TableBody, TableCell, TableHead, TableRow, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import './index.css'; // Linking your CSS file
+import Navbar from '../../Components/Navbar';
+import SearchBar from '../../Components/SearchBar'; // Assuming you have a custom SearchBar component
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
-import Navbar from '../../Components/Navbar'; // Assuming you have a Navbar component
-import './index.css'; // Assuming you have a CSS file for styling
-
 
 const LeaveManagementSystem = () => {
   const [data, setData] = useState([]);
@@ -84,6 +88,7 @@ const LeaveManagementSystem = () => {
         }
       })
       .catch((err) => console.log(err));
+
   };
 
   /*const formatRegNumber = (regNumber) => {
@@ -127,22 +132,9 @@ const LeaveManagementSystem = () => {
                 <TableCell>{item.duration}</TableCell>
                 <TableCell>{item.status}</TableCell>
                 <TableCell>
-                  <Button
-                    variant="contained"
-                    color="success"
-                    onClick={() => handleApprove(item.leave_id, item.regNumber)}
-                    disabled={item.status !== 'Pending'}
-                  >
-                    ✔️
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={() => handleReject(item.leave_id, item.regNumber)}
-                    disabled={item.status !== 'Pending'}
-                  >
-                    ❌
-                  </Button>
+
+                  <Button variant="contained" color="primary" onClick={() => handleAction(item.id)}>Action</Button>
+
                 </TableCell>
               </TableRow>
             ))}
@@ -153,4 +145,6 @@ const LeaveManagementSystem = () => {
   );
 };
 
+
 export default LeaveManagementSystem;
+

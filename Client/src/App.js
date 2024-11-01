@@ -1,4 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState, useEffect } from 'react';
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from "./Pages/Dashboard";
 import Drivers from './Pages/Drivers';
@@ -10,7 +12,9 @@ import EmployeePerformance from './Pages/EmployeePerformance';
 import SeeDetails from './Pages/EmployeePerformance/SeeDetails';
 import Home from './Pages/Home';
 import Leave_01 from './Pages/Leave_01';
+import LeaveForm from './Pages/LeaveForm';
 import Login from './Pages/Login';
+import Settings from "./Components/Navbar/Settings";
 import SalaryMain from './Pages/SalaryMain';
 import Salary from './Pages/SalaryMain/Salary';
 import SeePerformance from './Pages/SeePerformance';
@@ -19,6 +23,12 @@ import NewRequest from './Pages/NewRequest';
 import Notification from './Pages/Notifications';
 import SalaryCalc from './Pages/SalaryCalc';
 import SalarySlip from './Pages/SalarySlip';
+
+import Order from "./Pages/Order";
+import AddOrderPage from "./Pages/Order/AddOrderPage";
+import ForgotPassword from "./Pages/Login/ForgotPassword";
+import OtpVerification from "./Pages/Login/OtpVerification";
+import SetNewPassword from "./Pages/Login/SetNewPassword";
 import EditEmployee from './Pages/EditEmployee.js'
 import EditDriver from './Pages/EditDriver'
 import AddNewUser from './Pages/AdminDashboard/AddNewUser'
@@ -28,6 +38,8 @@ import StoreManagerDashboard from './Pages/StoreManager/StoreManagerDashboard';
 
 
 import './App.css';
+
+
 
 function App() {
   return (
@@ -47,11 +59,22 @@ function App() {
         <Route path="/salaryMain" element={<SalaryMain />} />
         <Route path="/salary" element={<Salary />} />
         <Route path="/leave01" element={<Leave_01 />} />
-        <Route path="/HistoryRequestMaterial" element={<HistoryRequestMaterial />} />
+
+        <Route path="/leaveForm" element={<LeaveForm />}/>
+        <Route path="/histortRequestMaterial" element={<HistoryRequestMaterial />} />
+
         <Route path="/newRequest" element={<NewRequest />} />
         <Route path="/notifications" element={<Notification />} />
         <Route path="/salaryCalc" element={<SalaryCalc />} />
         <Route path="/salarySlip" element={<SalarySlip />} />
+
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/addOrderPage" element={<AddOrderPage />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/otpVerification" element={<OtpVerification />} />
+        <Route path="/setNewPassword" element={<SetNewPassword />} />
+
         <Route path="/dashboard/edit_employee/:e_id" element={<EditEmployee />} />
       <Route path="/admin_dashboard" element={<AdminDashboard/>}/>
       <Route path="/addNewUser" element={<AddNewUser/>}/>
@@ -59,6 +82,7 @@ function App() {
       <Route path="/edit_driver" element={<EditDriver />}></Route>
       <Route path="/storemanager_dashboard" element={<StoreManagerDashboard />}></Route>
       
+
 
       </Routes>
     </BrowserRouter>

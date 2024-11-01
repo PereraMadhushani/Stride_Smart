@@ -10,7 +10,7 @@ body, html {
 
 /* Background for the body or outer container */
 .body-background {
-  background-image: url('../../assets/images/background.jpeg'); /* Fallback in case inline styling doesn't work */
+  /*background-image: url('../../assets/images/background.jpeg'); /* Fallback in case inline styling doesn't work */
   background-size: cover;      /* Cover entire viewport */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Avoid repeating the background image */
@@ -26,7 +26,7 @@ body, html {
   width: 65%; /* Adjust as needed */
   max-width: 800px; /* Set a maximum width */
   height: auto; /* Height can be adjusted or set to auto */
-  background:pink(52, 50, 49, 0.5); /* Semi-transparent background */
+  background: rgba(59, 30, 84, 0.5); /* Semi-transparent background */
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
   border-radius: 50px; /* Rounded corners */
   overflow: hidden; /* Hide any overflow */
@@ -52,7 +52,7 @@ body, html {
 
 .p-5 {
   padding: 3rem !important;
-  color: #750E21;
+  color: #3B1E54; /* Text color from the theme */
 }
 
 .rounded {
@@ -61,7 +61,7 @@ body, html {
 
 .h3 {
   margin-top: -0px; /* Adjust margin as needed */
-  color: #750E21 (50,50,20 0.5);
+  color: #3B1E54; /* Text color from the theme */
   text-align: center; /* Center text */
 }
 
@@ -71,24 +71,27 @@ body, html {
 
 /* Styling for the form fields */
 .form-control {
-  border: 1px solid #cccccc00;
+  border: 1px solid #9B7EBD; /* Border color from the theme */
   border-radius: 5px;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
+  background-color: #EEEEEE; /* Background color from the theme */
+  color: #3B1E54; /* Text color from the theme */
 }
 
 /* Button styling */
 .btn-success {
-  background-color: #191919;
-  border-color: #191919;
+  background-color: #3B1E54; /* Background color from the theme */
+  border-color: #3B1E54; /* Border color from the theme */
   padding: 10px;
   font-size: 16px;
+  color: #EEEEEE; /* Text color from the theme */
 }
 
 .btn-success:hover {
-  background-color: #750E21;
-  border-color: #750E21;
+  background-color: #9B7EBD; /* Hover background color from the theme */
+  border-color: #9B7EBD; /* Hover border color from the theme */
 }
 
 /* Checkbox and label styling */
@@ -98,6 +101,7 @@ body, html {
 
 .mb-1 label {
   font-size: 14px;
+  color: #3B1E54; /* Text color from the theme */
 }
 
 .mb-4 {
@@ -108,14 +112,14 @@ body, html {
 .forgot-password-link {
   display: block;
   margin-top: 10px;
-  color: wheat;
+  color: #9B7EBD; /* Text color from the theme */
   text-decoration: none;
   font-size: 14px;
   text-align: right;
 }
 
 .forgot-password-link:hover {
-  color: #750E21;
+  color: #3B1E54; /* Hover text color from the theme */
   text-decoration: underline;
 }
 

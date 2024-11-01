@@ -1,44 +1,53 @@
 import React, { useState } from 'react';
 import './index.css';
 import Navbar from '../../Components/Navbar';
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Import components
+import SeePerformance from '../SeePerformance';
+import EmployeeManagementSystem from '../EmployeeManagement';
+import AboutDrivers from '../Drivers';
 import EmployeePerformance from '../EmployeePerformance';
 import LeaveManagement from '../Leave_01'; 
-import EmployeeManagementSystem from '../EmployeeManagement';
 import CalculateSalary from '../SalaryMain'; 
+
+import RequestMaterial from '../HistoryRequestMaterial'; 
+import Order from '../Order';
+
 import HistoryRequestMaterial from '../HistoryRequestMaterial'; 
 import SeePerformance from '../SeePerformance';
 import AboutDrivers from '../Drivers';
 
 const Dashboard = () => {
-  const navigate = useNavigate(); 
-  const [selectedItem, setSelectedItem] = useState(null);
+  const { t } = useTranslation();
 
   const items = [
-    { id: 1, title: 'Employee Performance', path: '/employee_performance' },
-    { id: 2, title: 'Leave Management', path: '/leave01' }, 
-    { id: 3, title: 'Employee Management System', path: '/employeeManagement' }, 
-    { id: 4, title: 'Calculate Salary', path: '/salaryMain' },
-    { id: 5, title: 'Request Material', path: '/HistoryRequestMaterial' },
-    { id: 6, title: 'See Performance', path: '/seePerformance' },
-    { id: 7, title: 'About Drivers', path: '/drivers' },
+
+    { id: 6, title: t('seePerformance'), component: <SeePerformance /> },
+    { id: 3, title: t('employeeManagementSystem'), component: <EmployeeManagementSystem /> }, 
+    { id: 7, title: t('aboutDrivers'), component: <AboutDrivers /> },
+    { id: 1, title: t('order'), component: <Order /> },
+    { id: 2, title: t('leaveManagement'), component: <LeaveManagement /> }, 
+    { id: 4, title: t('calculateSalary'), component: <CalculateSalary /> },
+    { id: 5, title: t('requestMaterial'), component: <RequestMaterial /> },
+
   ];
+
+  // Set the initial state to the item corresponding to SeePerformance
+  const [selectedItem, setSelectedItem] = useState(items[0]);
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
-    navigate(item.path); 
   };
 
   return (
     <>
       <Navbar />
       <div className="dashboard-container">
-        <Sidebar items={items} setSelectedItem={handleItemClick} />
+        <Sidebar items={items} selectedItem={selectedItem} setSelectedItem={handleItemClick} />
         <div className="dashboard-content">
           {selectedItem ? (
-            <SelectedContent item={selectedItem} />
+            selectedItem.component
           ) : (
             <DefaultContent />
           )}
@@ -48,12 +57,12 @@ const Dashboard = () => {
   );
 };
 
-const Sidebar = ({ items, setSelectedItem }) => {
+const Sidebar = ({ items, selectedItem, setSelectedItem }) => {
   return (
     <div className="sidebar">
       <ul className="sidebar-list">
         {items.map((item) => (
-          <li key={item.id} className="sidebar-item">
+          <li key={item.id} className={`sidebar-item ${selectedItem.id === item.id ? 'active' : ''}`}>
             <button onClick={() => setSelectedItem(item)} className="sidebar-button">
               {item.title}
             </button>
@@ -66,29 +75,13 @@ const Sidebar = ({ items, setSelectedItem }) => {
 
 // Default content to show when no item is selected
 const DefaultContent = () => {
-  return <h2>Welcome to the Dashboard. Please select an item from the sidebar.</h2>;
-};
 
-// Component to render selected content based on the item clicked
-const SelectedContent = ({ item }) => {
-  switch (item.id) {
-    case 1:
-      return <EmployeePerformance />;
-    case 2:
-      return <LeaveManagement />;
-    case 3:
-      return <EmployeeManagementSystem />;
-    case 4:
-      return <CalculateSalary />;
-    case 5:
-      return <HistoryRequestMaterial />;
-    case 6:
-      return <SeePerformance />;
-    case 7:
-      return <AboutDrivers />;
-    default:
-      return <DefaultContent />;
-  }
+  const { t } = useTranslation();
+  return <h2>{t('welcomeMessage')}</h2>;
+
+
+
+
 };
 
 export default Dashboard;

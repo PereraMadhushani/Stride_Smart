@@ -2,18 +2,18 @@
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #f5f5f5;
+  background-color: #EEEEEE; /* Background color from the theme */
 }
 
 h1 {
   text-align: center;
-  color: #333;
+  color: #3B1E54; /* Text color from the theme */
 }
 
 /* Container styles */
 .MuiContainer-root {
   margin-top: 20px;
-  background-color: #fff;
+  background-color: #D4BEE4; /* Background color from the theme */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -28,17 +28,17 @@ h1 {
 
 .MuiTableCell-root {
   padding: 16px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #9B7EBD; /* Border color from the theme */
 }
 
 .MuiTableHead-root .MuiTableCell-root {
-  background-color: #f0591e;
-  color: white;
+  background-color: #9B7EBD; /* Background color from the theme */
+  color: #EEEEEE; /* Text color from the theme */
   font-weight: bold;
 }
 
 .MuiTableRow-root:hover {
-  background-color: #f4f4f4;
+  background-color: #D4BEE4; /* Hover background color from the theme */
 }
 
 .MuiTableCell-root button {
@@ -47,11 +47,11 @@ h1 {
 
 /* Button Styling */
 .MuiButton-containedSuccess {
-  background-color: #28a745;
-  color: white;
+  background-color: #3B1E54; /* Background color from the theme */
+  color: #EEEEEE; /* Text color from the theme */
 }
 
 .MuiButton-containedError {
-  background-color: #dc3545;
-  color: white;
+  background-color: #9B7EBD; /* Background color from the theme */
+  color: #EEEEEE; /* Text color from the theme */
 }

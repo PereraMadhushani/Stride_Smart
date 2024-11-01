@@ -1,12 +1,20 @@
-
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #D4BEE4; /* Background color from the theme */
+  border: 1px solid #9B7EBD; /* Border color from the theme */
+  border-radius: 5px;
+  padding: 5px;
+}
 
 .search-bar input {
   border: none;
-  background-color: #838f9f;
+  background-color: #EEEEEE; /* Background color from the theme */
   outline: none;
   width: 100%;
   padding: 5px;
   font-size: 16px;
+  color: #3B1E54; /* Text color from the theme */
 }
 
 .search-bar button {
@@ -18,4 +26,5 @@
 .search-bar button img {
   width: 20px;
   height: 20px;
+  filter: invert(39%) sepia(15%) saturate(1080%) hue-rotate(91deg) brightness(90%) contrast(85%); /* Adjust icon color to match theme */
 }

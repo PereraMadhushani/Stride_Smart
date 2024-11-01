@@ -1,0 +1,19 @@
+.add-order-page {
+  padding: 20px;
+}
+
+.back-button {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #3B1E54; /* Background color from the theme */
+  color: #EEEEEE; /* Text color from the theme */
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.back-button:hover {
+  background-color: #9B7EBD; /* Hover background color from the theme */
+}

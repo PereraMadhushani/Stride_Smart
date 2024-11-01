@@ -9,8 +9,8 @@ body {
 .employee-management-system {
   text-align: center;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0); /* Slightly transparent white */
-  color: black; /* Text color to be visible */
+  background-color: rgba(238, 238, 238, 0.8); /* Slightly transparent white */
+  color: #3B1E54; /* Text color from the theme */
   width: 80%; /* Adjust width as needed */
   margin: 20px auto; /* Center the section and add spacing */
   border-radius: 10px; /* Add rounded corners */
@@ -19,24 +19,9 @@ body {
   z-index: 1; /* Ensure content is above the background image */
 }
 
-/* Full-screen background image styles 
-body::before {
-  content: '';
-  position: fixed; /* Use fixed to cover entire viewport 
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../../assets/images/loging-bg.jpg'); /* Set your background image 
-  background-size: cover; /* Ensure the image covers the entire dashboard 
-  background-position: center; /* Center the image 
-  background-repeat: no-repeat; /* Prevent repeating of the image 
-  z-index: 0; /* Send the background behind the content 
-}*/
-
-/* Other styles */
 .employee-management-system h1 {
   margin-bottom: 20px;
+  color: #3B1E54; /* Text color from the theme */
 }
 
 .top-controls {
@@ -47,8 +32,8 @@ body::before {
 }
 
 .add-employee, .select-year {
-  background-color: #6c757d;
-  color: white;
+  background-color: #9B7EBD; /* Background color from the theme */
+  color: #EEEEEE; /* Text color from the theme */
   border: none;
   padding: 10px;
   cursor: pointer;
@@ -63,6 +48,16 @@ body::before {
   padding: 10px;
   width: 300px;
   font-size: 16px;
+  background-color: #D4BEE4; /* Background color from the theme */
+  border: 1px solid #9B7EBD; /* Border color from the theme */
+  border-radius: 5px;
+  color: #3B1E54; /* Text color from the theme */
+}
+
+.table-container {
+  max-height: 400px; /* Adjust the height as needed */
+  overflow-y: auto;
+  position: relative;
 }
 
 table {
@@ -71,13 +66,16 @@ table {
 }
 
 thead {
-  background-color: #F0591E;  
+  background-color: #9B7EBD; /* Background color from the theme */
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 th, td {
   padding: 15px;
   text-align: left;
-  
+  color: #3B1E54; /* Text color from the theme */
 }
 
 .user-icon {
@@ -95,4 +93,14 @@ th, td {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+
+.btn {
+  margin-right: 5px;
+  background-color: #3B1E54; /* Background color from the theme */
+  color: #EEEEEE; /* Text color from the theme */
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
