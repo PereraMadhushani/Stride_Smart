@@ -2,7 +2,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import SendIcon from '@mui/icons-material/Send';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../../Components/Navbar';
-import bgImage from '../../../assets/images/loging-bg.jpg'; 
+//import bgImage from '../../../assets/images/loging-bg.jpg'; 
 import SearchBar from '../../../Components/SearchBar';
 import {
   Box,

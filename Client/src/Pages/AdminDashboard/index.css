@@ -3,92 +3,95 @@ body{
 }
 
 .employee-management-system {
-  text-align: center;
-  padding: 20px;
-  background-color: white; /* Ensure background contrasts with main background */
-  color: black; /* Text color to be visible on white background */
-  width: 80%; /* Adjust width as needed */
-  margin: 20px auto; /* Center the section and add spacing */
-  border-radius: 10px; /* Add rounded corners */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
-}
 
-.employee-management-system h1 {
-  margin-bottom: 20px;
-}
+    text-align: center;
+    padding: 20px;
+    background-color: white; /* Ensure background contrasts with main background */
+    color: black; /* Text color to be visible on white background */
+    width: 80%; /* Adjust width as needed */
+    margin: 20px auto; /* Center the section and add spacing */
+    border-radius: 10px; /* Add rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  }
+  
+  .employee-management-system h1 {
+    margin-bottom: 20px;
+  }
+  
+  .top-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  /* styles.css */
+  .add-user {
+    display: inline-block;
+    padding: 5px 15px;         /* Adjust padding for size */
+    background-color: #656d65;  /* Green background */
+    color: white;               /* White text */
+    text-align: center;         /* Center text */
+    text-decoration: none;       /* Remove underline */
+    border: none;               /* Remove border */
+    border-radius: 5px;        /* Rounded corners */
+    font-size: 16px;            /* Font size */
+    transition: background-color 0.3s; /* Transition for hover effect */
+  }
+  
+  .add-user:hover {
+    background-color: #d0f7d2;  /* Darker green on hover */
+  }
+  
+  .add-employee, .select-year {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    padding: 10px;
+    width: 300px;
+    font-size: 16px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background-color: #F0591E;
+    color: white;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .user-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  
+  .status-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .employee_image{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
 
-.top-controls {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-/* styles.css */
-.add-user {
-  display: inline-block;
-  padding: 5px 15px;         /* Adjust padding for size */
-  background-color: #656d65;  /* Green background */
-  color: white;               /* White text */
-  text-align: center;         /* Center text */
-  text-decoration: none;       /* Remove underline */
-  border: none;               /* Remove border */
-  border-radius: 5px;        /* Rounded corners */
-  font-size: 16px;            /* Font size */
-  transition: background-color 0.3s; /* Transition for hover effect */
-}
 
-.add-user:hover {
-  background-color: #d0f7d2;  /* Darker green on hover */
-}
-
-.add-employee, .select-year {
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.search-bar {
-  margin-bottom: 20px;
-}
-
-.search-bar input {
-  padding: 10px;
-  width: 300px;
-  font-size: 16px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead {
-  background-color: #F0591E;
-  color: white;
-}
-
-th, td {
-  padding: 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.user-icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
-}
-
-.status-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.employee_image{
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}

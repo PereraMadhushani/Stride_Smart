@@ -7,11 +7,15 @@ import './index.css';
 import SearchBar from '../../Components/SearchBar';
 
 const SeePerformance = () => {
+  
+  const [performance, setPerformance] = useState({});
+  const [year, setYear] = useState(new Date().getFullYear());
+
   const [employeeTotal, setEmployeeTotal] = useState();
   const [driverTotal, setDriverTotal] = useState();
-  const [managerTotal, setManagerTotal] = useState([]);
+ 
   const [orderTotal, setOrderTotal] = useState([]);
-  const [performance, setPerformance] = useState({});
+
   const [filteredPerformance, setFilteredPerformance] = useState({});
   const [year, setYear] = useState(new Date().getFullYear());
 
@@ -89,12 +93,15 @@ const SeePerformance = () => {
   return (
     <>
       <Navbar />
-      <div className="dashboard">
+      <div className="see-performance-container">
         <main>
-          <h1 style={{ marginLeft: '500px' }}><b>See Performance</b></h1>
-          <div className="filters">
+
+          <h1 className="see-performance-title"><b>See Performance</b></h1>
+          <div className="see-performance-filters">
             <SearchBar />
-            <Select value={year} onChange={handleYearChange} className="year-select">
+            <Select value={year} onChange={handleYearChange} className="see-performance-year-select">
+
+       
               {[...Array(10)].map((_, i) => (
                 <MenuItem key={i} value={new Date().getFullYear() - i}>
                   {new Date().getFullYear() - i}
@@ -102,61 +109,50 @@ const SeePerformance = () => {
               ))}
             </Select>
           </div>
+  
+          <div className="see-performance-metrics">
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} md={3}>
+                <Card className="see-performance-metric-card">
+                  <CardContent>
+                    <Typography variant="h6"><b>Total Employees:</b></Typography>
+                    <Typography variant="h5">{filteredPerformance.totalEmployees}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-          <Grid container spacing={3} className="performance-metrics">
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className="metric-card" style={{ backgroundColor: '#287094', width: '340px', height: '140px' }}>
-                <CardContent>
-                  <Typography variant="h6"><b>Total Employees:</b></Typography>
-                  <h4>{employeeTotal}</h4>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className="metric-card" style={{ backgroundColor: '#287094', width: '340px', height: '140px' }}>
-                <CardContent>
-                  <Typography variant="h6"><b>Total Managers:</b></Typography>
-                  <h4>{managerTotal}</h4>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className="metric-card" style={{ backgroundColor: '#287094', width: '340px', height: '140px' }}>
-                <CardContent>
-                  <Typography variant="h6"><b>Total Drivers:</b></Typography>
-                  <Typography variant="h4">{driverTotal}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className="metric-card" style={{ backgroundColor: '#287094', width: '340px', height: '140px' }}>
-                <CardContent>
-                  <Typography variant="h6"><b>Total Complete Orders:</b></Typography>
-                  <Typography variant="h4">{orderTotal}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className="metric-card" style={{ backgroundColor: '#287094', width: '340px', height: '140px' }}>
-                <CardContent>
-                  <Typography variant="h6"><b>Total Damaged Product:</b></Typography>
-                  <Typography variant="h4">{filteredPerformance.totalDamagedProduct}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className="metric-card" style={{ backgroundColor: '#287094', width: '340px', height: '140px' }}>
-                <CardContent>
-                  <Typography variant="h6"><b>Salary (Rs):</b></Typography>
-                  <Typography variant="h4">{filteredPerformance.salary}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
 
-          <div className="chart">
-            <h2 className='text'><b>Overview at the End of Year</b></h2>
-            <LineChart width={600} height={300} className='chart1' data={filteredPerformance.monthlyData || []}
+              <Grid item xs={12} sm={6} md={3}>
+                <Card className="see-performance-metric-card">
+                  <CardContent>
+                    <Typography variant="h6"><b>Total Drivers:</b></Typography>
+                    <Typography variant="h5">{filteredPerformance.totalDrivers}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} sm={6} md={3}>
+                <Card className="see-performance-metric-card">
+                  <CardContent>
+                    <Typography variant="h6"><b>Total Complete Orders:</b></Typography>
+                    <Typography variant="h5">{filteredPerformance.totalCompleteOrders}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+
+              <Grid item xs={12} sm={6} md={3}>
+                <Card className="see-performance-metric-card">
+                  <CardContent>
+                    <Typography variant="h6"><b>Salary (Rs):</b></Typography>
+                    <Typography variant="h5">{filteredPerformance.salary}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
+          </div>
+  
+          <div className="see-performance-chart-container">
+            <h2 className="see-performance-subtitle"><b>Overview at the End of Year</b></h2>
+            <LineChart width={500} height={250} className="see-performance-chart" data={filteredPerformance.monthlyData || []}
               margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
               <XAxis dataKey="month" />
               <YAxis />

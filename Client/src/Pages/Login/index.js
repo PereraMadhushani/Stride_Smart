@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import bgImage from '../../assets/images/background.jpg'; // Background image
+//import bgImage from '../../assets/images/background.jpg'; // Background image
 import './index.css';
 
 const Login = () => {
@@ -48,7 +48,7 @@ const Login = () => {
 
 
     return (
-        <div className='body-background' style={{ backgroundImage: `url(${bgImage})` }}>
+        /*<div className='body-background' style={{ backgroundImage: `url(${bgImage})` }}>*/
             <div className='clear-square'> {/* Clear square container */}
                 <div className='login-container'>
                     <div className='p-5 rounded w-50 d-flex' style={{ backgroundColor: '#cccccc00' }}>
@@ -88,7 +88,7 @@ const Login = () => {
                                     <input type="checkbox" name="tick" id="tick" className='me-2' />
                                     <label htmlFor='tick'>You agree with terms & conditions</label>
                                 </div>
-                                <Link to='/forgot-password' className='forgot-password-link'>Forgot Password?</Link>
+                                <Link to='/forgotPassword' className='forgot-password-link'>Forgot Password?</Link>
                             </form>
                         </div>
                         <div className='w-50 pl-3' style={{ border: 'none' }}>
@@ -97,7 +97,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        
     );
 }
 
